@@ -1,0 +1,59 @@
+#Number Guessing Game Objectives:
+
+# Include an ASCII art logo.
+# Allow the player to submit a guess for a number between 1 and 100.
+# Check user's guess against actual answer. Print "Too high." or "Too low." depending on the user's answer. 
+# If they got the answer correct, show the actual answer to the player.
+# Track the number of turns remaining.
+# If they run out of turns, provide feedback to the player. 
+# Include two different difficulty levels (e.g., 10 guesses in easy mode, only 5 guesses in hard mode).
+import random
+from replit import clear
+from art import logo
+
+def generate_num(): # Create a function to generate a num
+  num_list = []
+  for i in range (1,101): # range 101 as it doesnt read 101, and no 0 
+    num_list.append(i)
+  random_num = random.choice(num_list) # random choice of hte list of 100
+  return random_num
+    
+def compare_guess (user_guess, random_guess): # compares the random_guess (which is random_num) with the user_guess
+  if user_guess > random_guess:
+    return "Too High."
+  elif user_guess < random_guess:
+    return "Too Low."
+  elif user_guess == random_guess:
+    return "You Guessed it!"
+'''THE NUMBER GUESSING GAME. Chooses a random number between 1 and 100 with either easy / hard difficulty. If it is a hard
+you have 5 guesses, easy is 10. It will tell you if you are higher / lower, or if you guessed it. If you want to play again press y or n'''
+def number_guessing_game():
+  print(logo)
+  print("Welcome to the Number Guessing Game")
+  print("I am thinking of a number between 1 and 100")
+  difficulty = input("Choose a difficulty. Type 'easy' or 'hard': ").lower()
+  if difficulty == "easy":
+    attempts = 10 
+  elif difficulty == "hard":
+    attempts = 5
+  random_guess = generate_num()
+  while attempts != 0: # continuse looping til it reaches 0. Easy is 10 hard is 5
+    print(f"You have {attempts} remaining to guess the number") # Shows how many attempts you have
+    user_guess = int(input("Make a guess: "))
+    returned_string = compare_guess(user_guess, random_guess) # returned_string gets the value that returned a string
+    print(returned_string)
+    if(returned_string == "You Guessed it!"):
+      attempts = 1 # will still go through the attempts -1 as its in the loop
+    attempts -=1
+  if(returned_string == "You Guessed it!"):
+    print("You won congrats!!!")
+  else: print("You've run out of guesses, you lose.") # prints even if you guessed it already...
+  user_input = input("Do you want to play again enter 'y' or 'n'").lower()
+  if (user_input == 'y'):
+    clear()
+    number_guessing_game()
+  else:
+    print("Have a great day")
+  
+
+number_guessing_game()
