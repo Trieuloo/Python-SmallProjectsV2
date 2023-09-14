@@ -1,0 +1,114 @@
+############### Our Blackjack House Rules #####################
+ART FILE HERE: DELETE IF WANT ING TO RUN
+
+logo = """
+.------.            _     _            _    _            _    
+|A_  _ |.          | |   | |          | |  (_)          | |   
+|( \/ ).-----.     | |__ | | __ _  ___| | ___  __ _  ___| | __
+| \  /|K /\  |     | '_ \| |/ _` |/ __| |/ / |/ _` |/ __| |/ /
+|  \/ | /  \ |     | |_) | | (_| | (__|   <| | (_| | (__|   < 
+`-----| \  / |     |_.__/|_|\__,_|\___|_|\_\ |\__,_|\___|_|\_\\
+      |  \/ K|                            _/ |                
+      `------'                           |__/           
+"""
+                   
+
+                                      
+     
+
+## The deck is unlimited in size. 
+## There are no jokers. 
+## The Jack/Queen/King all count as 10.
+## The the Ace can count as 11 or 1.
+## Use the following list as the deck of cards:
+## cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+## The cards in the list have equal probability of being drawn.
+## Cards are not removed from the deck as they are drawn.
+## The computer is the dealer.
+# def val where if the value of all the cards >= 11 swap it to 1
+'''Creates a B'''
+import random
+from replit import clear
+from art import logo
+def Ace(test_val,computer_score,user_score):
+    if computer_score >= 21 or user_score >= 21:
+      return 1
+    elif computer_score < 21 or user_score < 21:
+      return 11
+      user_cards.append(str(user_cards[card])) # after its tested we append it on to the value
+      
+    if (card >= 2):
+      test_val = computer_cards[card]
+      computer_cards[card] = Ace(test_val)
+      computer_cards.append(str(computer_cards[cards]))
+  
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10] # we dont have to care about the differences between faces. 
+                            # we need to keep the blackjack program going until it reaches 21 
+user_cards= []
+computer_cards =[]
+start = 4
+user_score =0 
+computer_score =0 
+should_continue = "y"
+another_card = "y"
+
+print(logo)
+should_continue = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ").lower()
+while should_continue == "y":
+  for card in range (start):
+    value = random.choice(cards)
+    if (card < 2):
+      user_cards.append(value) # We want to append the value which is  -- the random value from cards. 
+      test_val=user_cards[card]  # Using the for loop value of card we want to make sure that we are calling upon the correct user_cards[0] to set test val = to that number. 
+      user_score += test_val
+      #WE WANT TO MAKE A SCORE tHAT TRACKS ALL THE LIST VALUES AND ADD THEM TO EACH OTHER AND RUN IT THROUGH ACE to see if the score > 11 the we return 1 in the following
+      if(test_val == 11):
+        user_cards[card] = Ace(test_val,computer_score,user_score) # We want to make sure test_val goes through all the checks if test_val = 11 (ACE) 
+      #then we return it and set it equal to the user_cards value that we would want it to be at.
+    if (card >= 2):
+      computer_cards.append(value)
+      test_val = computer_cards[card-2] # card - 2 because the value is starting from 2 to 4 from the for loop
+      computer_score += test_val
+      if(test_val == 11): # -> if it is an ace
+        computer_cards[card-2] = Ace(test_val,computer_score,user_score)
+#Card should not be in start anymore after 4 iterations we are still going to be in the while loop to make the game continue. 
+  print(f"Your cards: {user_cards}, current score: {user_score}\n Computer's first card: {computer_cards[0]}")
+  another_card = input ("Type 'y' to get another card, type 'n' to pass: ").lower() # get the input if you want another card
+  while another_card == 'y': # while loops so you can keep calling if u want to hit 
+      value = random.choice(cards)
+      user_cards.append(value)
+      for i in range (len(user_cards)-1, len(user_cards)):
+        user_score += user_cards[i]
+        print(f"Your next hand is: {user_cards}, next score: {user_score} \n Computer hand: {computer_cards[0]}")
+        if(user_score) > 21:
+          print(f"Your final hand: {user_cards}, final score: {user_score} \n Computer's final hand: {computer_cards}, final score: {computer_score} You lose 😤")
+          another_card = "x"
+        elif(user_score) == 21:
+          print(f"Your final hand: {user_cards}, final score: {user_score} \n Computer's final hand: {computer_cards}, final score: {computer_score} You hit blackjack!") 
+          another_card = "x"
+        elif(user_score) <21:     
+          another_card = input ("Type 'y' to get another card, type 'n' to pass: ").lower()
+          continue
+  if another_card == 'n':
+    if user_score > computer_score:
+      print(f"Your final hand: {user_cards}, final score: {user_score} \n Computer's final hand: {computer_cards}, final score: {computer_score} You won!!!")
+    elif user_score == computer_score:
+      print(f"Your final hand: {user_cards}, final score: {user_score} \n Computer's final hand: {computer_cards}, final score: {computer_score} You tied")
+    elif user_score < computer_score:
+      print(f"Your final hand: {user_cards}, final score: {user_score} \n Computer's final hand: {computer_cards}, final score: {computer_score} You lose 😤")
+    should_continue = False
+
+  should_continue = input("Do you want to play another game of Blackjack? Type 'y' or 'n': ").lower()
+  if should_continue == "y":
+    user_cards= []
+    computer_cards =[]
+    start = 4
+    user_score =0 
+    computer_score =0 
+    should_continue = "y"
+    another_card = "y"
+    clear()
+    print(logo)
+  elif should_continue == "n":
+    print("Thanks for playing blackjack")
+    
