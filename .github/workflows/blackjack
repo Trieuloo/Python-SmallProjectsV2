@@ -20,6 +20,7 @@ logo = """
 #Create the repetitive loop as a function instead of a while loop to make it nicer and you can call upon it in the future
 #Cards dont have to always equal number vaulues | you can show if they are J Q K A and put values 10 10 10 11them under a dictionary to call upon them in a function later
 # Create a proper function of getting a blackjack where it is only a blackjack IF they get the that is equal to 21 initally, it is not going to be a blackjack if it is 21 in the future
+# Improve overall clean code to try to make it more redable
 
 ############### Our Blackjack House Rules #####################
 
