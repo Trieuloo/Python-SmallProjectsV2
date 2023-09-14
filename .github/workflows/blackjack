@@ -12,7 +12,7 @@ logo = """
 """
                    
 
-my rendition of blackjack using angela yu's udemy course. Used no hints 
+#my rendition of blackjack using angela yu's udemy course. Used no hints. This code is not refactored yet
 
 ############### Our Blackjack House Rules #####################
 
