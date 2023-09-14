@@ -14,6 +14,13 @@ logo = """
 
 #my rendition of blackjack using angela yu's udemy course. Used no hints. This code is not refactored yet
 
+#How to make it cleaner... I would call upon different functions instead of only having an Ace function. 
+#This would be a function where it compares all the different cards under a single card function to have both user / computer inputs under the same file.
+#Create a deal each card function where it automatically deals every card cause theres alot of repetive code.
+#Create the repetitive loop as a function instead of a while loop to make it nicer and you can call upon it in the future
+#Cards dont have to always equal number vaulues | you can show if they are J Q K A and put values 10 10 10 11them under a dictionary to call upon them in a function later
+# Create a proper function of getting a blackjack where it is only a blackjack IF they get the that is equal to 21 initally, it is not going to be a blackjack if it is 21 in the future
+
 ############### Our Blackjack House Rules #####################
 
 ## The deck is unlimited in size. 
@@ -34,7 +41,7 @@ def Ace(test_val,computer_score,user_score):
     if computer_score >= 21 or user_score >= 21:
       return 1
     elif computer_score < 21 or user_score < 21:
-      return 11
+      return 11 
       user_cards.append(str(user_cards[card])) # after its tested we append it on to the value
       
     if (card >= 2):
