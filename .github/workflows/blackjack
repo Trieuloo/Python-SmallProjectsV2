@@ -89,6 +89,23 @@ while should_continue == "y":
         elif(user_score) <21:     
           another_card = input ("Type 'y' to get another card, type 'n' to pass: ").lower()
           continue
+
+# this section of the code was an addition BUT NOT TESTED CODE, however it should be getting a random choice and appending it on to the computer cards. if all the values in the block
+are greater than 17, we want to make sure to stop the loop and continue on to compare if its 17 <x < 21. We do have two valeus where if it is == 21 dealer wins, and if its >21 you win cause the dealer 
+automatically busted
+  #while computer_score < 17: | forces the computer to go until computer score is above value
+      #value = random.choice(cards)
+      #computer_cards.append(value)
+      for i in range (len(user_cards)-1, len(user_cards)): # we get the value of i which can be used to call upon the computer_score
+            computer_score += computer_cards[i]
+            #if(computer_score) > 21:
+                #print(f"Your final hand: {user_cards}, final score: {user_score} \n Computer's final hand: {computer_cards}, final score: {computer_score} The dealer busted congrats")
+                #another_card = "x"
+              #elif(computer_score) == 21:
+                #print(f"Your final hand: {user_cards}, final score: {user_score} \n Computer's final hand: {computer_cards}, final score: {computer_score} The dealer hit Blackjack, you lose!") 
+                #another_card = "x"
+    
+      
   if another_card == 'n':
     if user_score > computer_score:
       print(f"Your final hand: {user_cards}, final score: {user_score} \n Computer's final hand: {computer_cards}, final score: {computer_score} You won!!!")
