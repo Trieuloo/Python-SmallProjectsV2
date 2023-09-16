@@ -1,4 +1,6 @@
-# not completely finished, remove global variables. simplify results into a function, create correct prompt for if its lower. In general lost interest in creating the higher / lower project so i stopped and moved forward.
+# not completely finished, remove global variables. simplify results into a function, create correct prompt for if its lower. 
+#Above are what I would improve off the top of my head
+#In general lost interest in creating the higher / lower project so i stopped and moved forward. 
 
 
 import random
