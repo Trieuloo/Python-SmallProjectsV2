@@ -1,0 +1,87 @@
+# not completely finished, remove global variables. simplify results into a function, create correct prompt for if its lower. In general lost interest in creating the higher / lower project so i stopped and moved forward.
+
+
+import random
+from game_data import data
+from art import logo 
+#Classic Higher / lower game grabs game_data value from a dictionary called data in game_Data
+CHOICE_A = "A"
+CHOICE_B = "B"
+GLOBAL_NUM1=0
+GLOBAL_NUM2=0
+
+dictionary = {
+  0:"name",
+  1:"follower_count",
+  2:"description",
+  3:"country",
+}
+  
+def compare(choices):
+  if choices == 1:
+      return (f"Compare {CHOICE_A}: ")
+  elif choices == 2:
+      return (f"Compare {CHOICE_B}: ")
+    
+
+  
+def get_prompt(data, choices):
+  # for data_strings in data:
+  random_dict = random.choice(data)
+  count = 4
+  # for values in random_dict:,
+  prompt_string = compare(choices)
+  for val in range (0,3):
+    headers = dictionary[val]
+    value = random_dict[headers]
+    if val == 1:
+      if choices == 1:
+        global GLOBAL_NUM1
+        GLOBAL_NUM1 = random_dict[headers]
+      elif choices == 2:
+        global GLOBAL_NUM2
+        GLOBAL_NUM2 = random_dict[headers]
+    random_dict_combined = str(random_dict[headers]) + ", "
+    prompt_string += random_dict_combined       
+  return prompt_string
+  # for filler in data:
+
+def game():
+  
+  guess = input ("Is A higher or lower than B ").lower()
+  for val in range (1,3):
+    choices = val
+    final = get_prompt(data, choices)
+    print(final)
+  if guess == "higher":
+    if GLOBAL_NUM1 >= GLOBAL_NUM2:
+      print("You are correct!")
+      game()
+  if guess == "lower":
+    if GLOBAL_NUM1 < GLOBAL_NUM2:
+      print("You are wrong")
+  else:
+      play_again = input( "You are not correct. Do you want to play again? Y / N " ).lower()
+      if (play_again == "y"):
+        game()  
+
+    
+  
+game()
+
+
+  
+
+
+#Create a function that fetches the data from the two
+
+#Creates a function that compares data from the two fetched
+
+#IN MAIN - we want to set compare ranging a list from 0 to 1 store the value for my function
+
+#Automatically prints out one person from the list, then another one
+
+#Then asks who has more followers
+
+#If you get it right it says your right and moves the current score +=1
+
