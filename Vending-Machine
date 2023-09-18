@@ -1,0 +1,152 @@
+# A vending machine program where it continually prompts you to insert coins, how much change, how much materials are left over. If you want you can click report to see all the materials leftover as well
+MENU = {
+    "espresso": {
+        "ingredients": {
+            "water": 50,
+            "coffee": 18,
+        },
+        "cost": 1.5,
+    },
+    "latte": {
+        "ingredients": {
+            "water": 200,
+            "milk": 150,
+            "coffee": 24,
+        },
+        "cost": 2.5,
+    },
+    "cappuccino": {
+        "ingredients": {
+            "water": 250,
+            "milk": 100,
+            "coffee": 24,
+        },
+        "cost": 3.0,
+    }
+}
+
+resources = {
+    "water": 300,
+    "milk": 200,
+    "coffee": 100,
+}
+
+QUARTER = 0.25
+PENNY = 0.01
+NICKEL = 0.05
+DIME = 0.10
+
+def coins():
+  '''Obtains all the coins and their inputs, then adds them together and returns it '''
+  coins = 0
+  print("Please Insert Coins ")
+  quarters = int(input("How Many Quarters: "))
+  coins+= QUARTER * quarters
+  dimes = int(input ("How Many Dimes: "))
+  coins+= dimes * DIME
+  nickels = int(input ("How Many Nickels: "))
+  coins += NICKEL * nickels
+  pennies = int(input("How Many Pennies: "))
+  coins += PENNY * pennies
+  return coins
+
+def get_cost(inital_prompt):
+  '''Gets the cost from the MENU dictionary and returns it'''
+  customer_order = MENU[inital_prompt]
+  value = customer_order["cost"]
+  return value
+  
+def get_ingredients(inital_prompt):
+  '''Gets the customer ingredients from the MENU dictionary and returns it '''
+  customer_order = MENU[inital_prompt]
+  ingredients = customer_order["ingredients"]
+  return ingredients
+
+def get_menu_resources(inital_prompt):
+  '''Gets all the menu resources, and prints out the value left, havent made so it gives no val if i<0 '''
+  ingredients = get_ingredients(inital_prompt)
+  water_val =ingredients['water'] 
+  if inital_prompt == "espresso":
+    milk_val = 0
+  else:
+    milk_val = ingredients['milk']
+  coffee_val = ingredients['coffee']
+  initial_water_val = resources['water']
+  initial_milk_val = resources ['milk']
+  initial_coffee_val = resources['coffee']
+  final_water_val = initial_water_val - water_val
+  final_milk_val = initial_milk_val - milk_val
+  final_coffee_val = initial_coffee_val - coffee_val
+  leftover_water = resources["water"]= final_water_val
+  leftover_milk = resources["milk"]= final_milk_val
+  leftover_coffee = resources["coffee"]= final_coffee_val
+  print(f"There was initally {initial_water_val} water and the drink consumed {water_val}. Now there is {leftover_water}")
+  print(f"There was initally {initial_milk_val} water and the drink consumed {milk_val}. Now there is {leftover_milk}")
+  print(f"There was initally {initial_coffee_val} water and the drink consumed {coffee_val}. Now there is {leftover_coffee}")
+      
+
+def compare(cost, input_value):
+  '''Compares the cost, and the input value to make sure they are not scamming the business, then outputs a string | Returns CALC which is going to be the input value - cost'''
+  calc = 0
+  calc_string = ""
+  if(cost < input_value):
+    calc += input_value - cost
+    calc_int = round(calc,2)
+    calc_string += str(calc_int)
+    print(f"You input {input_value}, and the item costs ${cost} which is a difference of {calc_string}. Please accept the change ")
+    return calc
+  elif(cost > input_value):
+    calc += input_value - cost
+    calc_int = round(calc,-2)
+    calc_string += str(calc)
+    print(f"You input {input_value}, and the item costs ${cost} which is a difference of {calc_string}. Please enter more money")
+    return calc
+  elif(cost == input_value):
+    calc += input_value - cost
+    calc_int = round(calc,2)
+    calc_string += str(calc)
+    print(f"You input {input_value}, and the item costs ${cost} which is a difference of {calc_string}. Thanks for using the vending machine")
+    return calc
+
+def reports():
+  water_val = resources['water']
+  milk_val = resources['milk']
+  coffee_val = resources['coffee']
+  print(f"Water: {water_val}ml")
+  print(f"Milk: {milk_val}ml")
+  print(f"Coffee: {coffee_val}g")
+
+def vending_machine():
+  drink = input("What would you like? (Espresso/Latte/Cappuccino) or resources for more info. : ").lower()
+  if drink == "resources":
+    reports()
+  else:
+    input_value = coins()
+    cost = get_cost(drink)
+    compare(cost, input_value)
+    get_menu_resources(drink)
+    get_ingredients(drink)
+    vending_machine()
+
+vending_machine()
+  
+  
+
+#print coffee
+
+#check if all the resources are sufficient
+
+#process all the coins
+
+#check if the transaction was successfull
+
+#make the coffee properly
+
+#if beginning input is report it will report back all the resources that you ahve
+
+# Otherwise if you put espresso / latte / capp it prompts please insert coins,
+# It prompts each time for quarters dimes nickles pennies and gives back the change if its too much
+# also drops the whole rport value
+
+
+
